@@ -64,13 +64,25 @@ const displayMovies = () => {
     return fetch('/api/movies')
         .then(response => response.json())
         .then(movies => {
+            // build stars
+
             let html = '';
             movies.forEach(({title, rating, id}) => {
                 html += ` <div class="col-md-4">`;
                 html += `<div class="card" style="width: 12rem;">`;
                 html += `<h5 class="card-title" > ${title} </h5>`;
-                html += `<div card="card-body"> ${rating} </div>`;
-                html += ` <div class="card-footer"> Card footer </div>`;
+                html += `<div card="card-body">Img </div>`;
+                let starHTML = "<h2>Star Rating</h2>";
+
+                for (let i = 0; i < rating; i++) {
+                    starHTML += `<span class="fa fa-star checked"></span>`;
+                }
+                for (let i = rating; i < 5; i++) {
+                    starHTML += `<span class="fa fa-star"></span>`;
+                }
+                //starHTML +=          <span class="fa fa-star"></span>
+                console.log(starHTML);
+                html += ` <div class="card-footer"> ${starHTML} </div>`;
                 html += `</div></div>`;
             });
             console.log(html);

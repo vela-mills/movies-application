@@ -19,6 +19,11 @@
       "title": "Sleeping Beauty",
       "rating": "4",
       "id": 4
+    },
+    {
+      "title": "New Movie",
+      "rating": "3",
+      "id": 5
     }
   ]
 }

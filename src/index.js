@@ -31,3 +31,12 @@ document.getElementById("add-movie").addEventListener('click', event => {
   displayMovies();
 });
 
+
+const {updateMovie} = require('./api.js');
+document.getElementById("update-movie").addEventListener('click', event => {
+  updateMovie(event);
+  displayMovies();
+});
+
+
+

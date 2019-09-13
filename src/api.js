@@ -143,21 +143,59 @@ const updateMovie = (e) => {
 
 
 /**Dynamically build html*/
+const getMoviePoster = () => {
+    let moviePosters = [];
+    return fetch('/api/movies')
+        .then(response => response.json())
+        .then(movies => {
+            // build stars
+            movies.forEach(({title}) => {
+                /**
+                 * Find url */
+                    //console.log(title);
+                let newTitle = title.toLowerCase().split(' ').join('+');
+                console.log(newTitle);
+                let urlPoster = "";
+                fetch(`http://www.omdbapi.com/?t=${newTitle}?&apikey=movieKey`)
+                    .then((response) => {
+                        //console.log('found');
+                        return response.json();
+                    })
+                    .then((data) => {
+                        urlPoster = data["Poster"];
+                        console.log(urlPoster);
+                        moviePosters.push(urlPoster);
+                    })
+                    .catch(
+                        moviePosters.push(urlPoster));
 
+            });
+        })
+        .catch(console.log('error'));
+
+    return moviePosters;
+}
 
 const displayMovies = () => {
     let idArray = [];
+    //let moviePosters = [];
+    //getMoviePoster()
+
+
     return fetch('/api/movies')
         .then(response => response.json())
         .then(movies => {
             // build stars
 
             let html = '';
+            let index = 0;
             movies.forEach(({title, rating, id}) => {
                 html += ` <div class="col-md-4">`;
                 html += `<div class="card" style="width: 12rem;">`;
-                html += `<h5 class="card-title" > ${title} </h5>`;
-                //html += `<div card="card-body">Img </div>`;
+                html += `<h5 class="card-body" > ${title} </h5>`;
+
+                html += `<div card="card-body"><img src="" id="img${id}" style="width: 150px; height: 150px"> </div>`;
+                index++;
                 let starHTML = "";
 
                 for (let i = 0; i < rating; i++) {
@@ -166,11 +204,10 @@ const displayMovies = () => {
                 for (let i = rating; i < 5; i++) {
                     starHTML += `<span class="fa fa-star"></span>`;
                 }
-                //starHTML +=          <span class="fa fa-star"></span>
-                //console.log(starHTML);
-                html += ` <div class="card-body"> ${starHTML} </div>`;
-                html += `<div class="row card-footer">`;
-                html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block" id="delete${id}"><i class="fa fa-ban"></i></i></i></button></div>`;
+
+                html += ` <div class="card-body"><h5>Rating</h5> ${starHTML} </div>`;
+                html += `<div class="row card-footer" style="margin-left: 0px; margin-right: 0px">`;
+                html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block" id="delete${id}"><i class="fa fa-ban"></i></button></div>`;
                 html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
                 html += `</div>`;
                 html += `</div>`;
@@ -206,6 +243,36 @@ const displayMovies = () => {
                     displayMovies();
                 });
             }
+        })
+        .then( () => {
+            return fetch('/api/movies')
+                .then(response => response.json())
+                .then(movies => {
+                    // build stars
+                    movies.forEach(({title, id }) => {
+                        /**
+                         * Find url */
+                            //console.log(title);
+                        let newTitle = title.toLowerCase().split(' ').join('+');
+                        console.log(newTitle);
+                        let urlPoster = "";
+                        fetch(`http://www.omdbapi.com/?t=${newTitle}?&apikey=63c8d483`)
+                            .then((response) => {
+                                //console.log('found');
+                                return response.json();
+                            })
+                            .then((data) => {
+                                urlPoster = data["Poster"];
+                                console.log(urlPoster);
+                                // Attach the url to the img
+                                document.getElementById(   `img${id}`).src = urlPoster;
+                            })
+                            .catch(
+                                (console.log('no poster')));
+
+                    });
+                })
+                .catch(console.log('error'));
         })
 };
 

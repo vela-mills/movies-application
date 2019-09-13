@@ -6,14 +6,19 @@
       "id": 1
     },
     {
-      "title": "Star Wars: A New Hope",
-      "rating": "5",
+      "title": "Star Wars",
+      "rating": "3",
       "id": 2
     },
     {
-      "title": "Sleeping Beauty II",
-      "rating": "5",
-      "id": 4
+      "title": "Snow White",
+      "rating": "3",
+      "id": 3
+    },
+    {
+      "title": "blue",
+      "rating": "1",
+      "id": 6
     }
   ]
 }

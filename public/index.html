@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower%7CSource+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stars.css">
     <link rel="stylesheet" href="/style.css"/>
+
+
 </head>
 <body>
 <div class="container-fluid">
@@ -36,14 +39,33 @@
                                 <h5 class="mt-2">Movie Name</h5>
                                 <input class="form-control" type="text" id="movie-name" name="movie-name"><br>
                                 <h5>Rating</h5>
-                                <select class="mb-1 custom-select" id="rating">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <!--                                <select class="mb-1 custom-select" id="rating">-->
+                                <!--                                    <option>1</option>-->
+                                <!--                                    <option>2</option>-->
+                                <!--                                    <option>3</option>-->
+                                <!--                                    <option>4</option>-->
+                                <!--                                    <option>5</option>-->
 
-                                </select>
+                                <!--                                </select>-->
+                                <div id="log">
+                                    <fieldset>
+                                <span class="star-cb-group">
+                                  <input type="radio" id="rating-5" name="rating" value="5"/><label
+                                        for="rating-5">5</label>
+                                  <input type="radio" id="rating-4" name="rating" value="4"/><label
+                                        for="rating-4">4</label>
+                                  <input type="radio" id="rating-3" name="rating" value="3"/><label
+                                        for="rating-3">3</label>
+                                  <input type="radio" id="rating-2" name="rating" value="2"/><label
+                                        for="rating-2">2</label>
+                                  <input type="radio" id="rating-1" name="rating" value="1"/><label
+                                        for="rating-1">1</label>
+                                  <input type="radio" id="rating-0" name="rating" value="0"
+                                         class="star-cb-clear"/><label
+                                        for="rating-0">0</label>
+                                </span>
+                                    </fieldset>
+                                </div>
 
                                 <input class=" btn btn-success btn-lg btn-block" id="add-movie" type="submit"/>
                             </form>
@@ -54,14 +76,16 @@
                                 <h5 class="mt-2">New name</h5>
                                 <input class="form-control" type="text" id="new-name" name="movie-name"><br>
                                 <h5>New Rating</h5>
-                                <select class="mb-1 custom-select" id="new-rating">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <!--                                <select class="mb-1 custom-select" id="new-rating">-->
+                                <!--                                    <option>1</option>-->
+                                <!--                                    <option>2</option>-->
+                                <!--                                    <option>3</option>-->
+                                <!--                                    <option>4</option>-->
+                                <!--                                    <option>5</option>-->
 
-                                </select>
+                                <!--                                </select>-->
+
+
                                 <input type="hidden" id="updateMovieID">
                                 <input class=" btn btn-success btn-lg btn-block" id="update-movie" type="submit"/>
                             </form>
@@ -92,9 +116,16 @@
         margin: 0;
     }
 </style>
+
 <script src="./main.js"></script>
 <script>
-
+    // var logID = 'log',
+    //     log = $('<div id="' + logID + '"></div>');
+    // $('body').append(log);
+    $('[type*="radio"]').change(function () {
+        var me = $(this);
+        log.html(me.attr('value'));
+    });
 </script>
 </body>
 </html>

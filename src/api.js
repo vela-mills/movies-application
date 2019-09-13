@@ -96,6 +96,18 @@ const moveData = (id) => {
             document.getElementById("new-rating").value = rating;
             document.getElementById("updateMovieID").value = id;
 
+            //changes stars to black
+            for (let i = 1; i <= 5; i++) {
+                let cur = document.getElementById("new-star" + i)
+                cur.className = "fa fa-star"
+            }
+            //change stars to orange
+            for (let i = 1; i <= rating; i++) {
+                let cur = document.getElementById("new-star" + i)
+                if (cur.className == "fa fa-star") {
+                    cur.className = "fa fa-star checked"
+                }
+            }
         });
 };
 
@@ -145,8 +157,8 @@ const displayMovies = () => {
                 html += ` <div class="col-md-4">`;
                 html += `<div class="card" style="width: 12rem;">`;
                 html += `<h5 class="card-title" > ${title} </h5>`;
-                html += `<div card="card-body">Img </div>`;
-                let starHTML = "<h2>Star Rating</h2>";
+                //html += `<div card="card-body">Img </div>`;
+                let starHTML = "";
 
                 for (let i = 0; i < rating; i++) {
                     starHTML += `<span class="fa fa-star checked"></span>`;
@@ -156,12 +168,13 @@ const displayMovies = () => {
                 }
                 //starHTML +=          <span class="fa fa-star"></span>
                 //console.log(starHTML);
-                html += ` <div class="card-footer"> ${starHTML} </div>`;
+                html += ` <div class="card-body"> ${starHTML} </div>`;
+                html += `<div class="row card-footer">`;
+                html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block" id="delete${id}"><i class="fa fa-ban"></i></i></i></button></div>`;
+                html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
                 html += `</div>`;
-                html += `<div class="row">`;
-                html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block" id="delete${id}">Delete</button></div>`;
-                html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block" id="update${id}">Update</button></div>`;
-                html += `</div></div > `;
+                html += `</div>`;
+                html += `</div >`;
                 idArray.push(id);
             });
             // console.log(html);

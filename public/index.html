@@ -43,14 +43,7 @@
                                 <h5 class="mt-2">Movie Name</h5>
                                 <input class="form-control" type="text" id="movie-name" name="movie-name"><br>
                                 <h5>Rating</h5>
-                                <!--                                <select class="mb-1 custom-select" id="rating">-->
-                                <!--                                    <option>1</option>-->
-                                <!--                                    <option>2</option>-->
-                                <!--                                    <option>3</option>-->
-                                <!--                                    <option>4</option>-->
-                                <!--                                    <option>5</option>-->
-
-                                <!--                                </select>-->
+                                <input type="hidden" id="rating">
                                 <div>
                                     <h2>Star Rating</h2>
                                     <span class="fa fa-star" id="star1" onclick="add(this,1)"></span>
@@ -58,7 +51,6 @@
                                     <span class="fa fa-star" id="star3" onclick="add(this,3)"></span>
                                     <span class="fa fa-star" id="star4" onclick="add(this,4)"></span>
                                     <span class="fa fa-star" id="star5" onclick="add(this,5)"></span>
-
                                 </div>
                                 <input class=" btn btn-success btn-lg btn-block" id="add-movie" type="submit"/>
                             </form>
@@ -69,15 +61,15 @@
                                 <h5 class="mt-2">New name</h5>
                                 <input class="form-control" type="text" id="new-name" name="movie-name"><br>
                                 <h5>New Rating</h5>
-                                <!--                                <select class="mb-1 custom-select" id="new-rating">-->
-                                <!--                                    <option>1</option>-->
-                                <!--                                    <option>2</option>-->
-                                <!--                                    <option>3</option>-->
-                                <!--                                    <option>4</option>-->
-                                <!--                                    <option>5</option>-->
-
-                                <!--                                </select>-->
-
+                                <input type="hidden" id="new-rating">
+                                <div>
+                                    <h2>Star Rating</h2>
+                                    <span class="fa fa-star" id="new-star1" onclick="update(this,1)"></span>
+                                    <span class="fa fa-star" id="new-star2" onclick="update(this,2)"></span>
+                                    <span class="fa fa-star" id="new-star3" onclick="update(this,3)"></span>
+                                    <span class="fa fa-star" id="new-star4" onclick="update(this,4)"></span>
+                                    <span class="fa fa-star" id="new-star5" onclick="update(this,5)"></span>
+                                </div>
 
                                 <input type="hidden" id="updateMovieID">
                                 <input class=" btn btn-success btn-lg btn-block" id="update-movie" type="submit"/>
@@ -113,7 +105,8 @@
 <script src="./main.js"></script>
 <script>
     function add(ths, sno) {
-
+console.log(ths);
+console.log(sno);
         for (var i = 1; i <= 5; i++) {
             var cur = document.getElementById("star" + i)
             cur.className = "fa fa-star"
@@ -125,7 +118,25 @@
                 cur.className = "fa fa-star checked"
             }
         }
+        document.getElementById('rating').value = sno;
+    }
 
+    function update(ths, sno) {
+        console.log(ths);
+        console.log(sno);
+        //turns stars to black
+        for (var i = 1; i <= 5; i++) {
+            var cur = document.getElementById("new-star" + i)
+            cur.className = "fa fa-star"
+        }
+        //change stars to orange
+        for (var i = 1; i <= sno; i++) {
+            var cur = document.getElementById("new-star" + i)
+            if (cur.className == "fa fa-star") {
+                cur.className = "fa fa-star checked"
+            }
+        }
+        document.getElementById('new-rating').value = sno;
     }
 </script>
 

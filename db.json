@@ -1,12 +1,12 @@
 {
   "movies": [
     {
-      "title": "Casablanca",
+      "title": "Casa Blanca",
       "rating": "4",
       "id": 1
     },
     {
-      "title": "Star ",
+      "title": "Star Wars",
       "rating": "5",
       "id": 2
     },
@@ -16,14 +16,19 @@
       "id": 3
     },
     {
-      "title": "blue",
-      "rating": "4",
-      "id": 6
-    },
-    {
       "title": "Sleeping Beauty",
       "rating": "4",
       "id": 7
+    },
+    {
+      "title": "it",
+      "rating": "3",
+      "id": 8
+    },
+    {
+      "title": "lion king",
+      "rating": "5",
+      "id": 9
     }
   ]
 }

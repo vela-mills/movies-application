@@ -6,8 +6,8 @@
       "id": 1
     },
     {
-      "title": "Star Wars",
-      "rating": "3",
+      "title": "Star ",
+      "rating": "5",
       "id": 2
     },
     {
@@ -17,8 +17,13 @@
     },
     {
       "title": "blue",
-      "rating": "1",
+      "rating": "4",
       "id": 6
+    },
+    {
+      "title": "Sleeping Beauty",
+      "rating": "4",
+      "id": 7
     }
   ]
 }

@@ -2,36 +2,52 @@ html, body {
     max-height: 100vh;
 
 }
-body{
+
+body {
     background-color: #3F3C3C;
+    style: "margin:0;"
 }
-h1{
-    color: orange;
+/*style="margin:0;"*/
+h1 {
+    /*color: orange;*/
+    color: #259A36;
 }
-form{
+
+form {
     background-color:#F4F1F1;
     margin-bottom: 2em;
+    border: 5px solid #259A36;
 
 }
-form h5{
+
+form h5 {
     color: red;
 }
-#movie-content{
-    background-color: #F4F1F1;
+
+#movie-content {
+    /*background-color: #F4F1F1;*/
     border-radius: 1em;
+    /*width: 100%;*/
 }
-.card{
+
+.card {
     background-color: #F4F1F1;
+    margin: 5px;
+    border: 5px solid #259A36;
 }
-.card-title{
+
+.card-title {
     color: #3F3C3C;
 }
-.card-footer{
+
+.card-footer {
     justify-content: flex-end;
 }
-.movie-button{
+
+.movie-button {
     line-height: .5em;
 }
+
 /*.container {*/
 /*    position: relative;*/
 /*    top: 50%;*/
@@ -41,21 +57,42 @@ form h5{
 .checked {
     color: orange;
 }
-.boxLoading {background-image: url(img/Spinner-1s-200px.gif);}
-.card-body{
+
+.boxLoading {
+    background-image: url(img/Spinner-1s-200px.gif);
+}
+
+.card-body {
     font-size: 2em;
 }
 
-#left-pane{
+.rcorners1 {
+    border-radius: 15px;
+    /*background: #73AD21;*/
+    /*padding: 20px;*/
+    /*width: 200px;*/
+    /*height: 150px;*/
+}
+
+.boxLoading {
+    background-image: url(img/Spinner-1s-200px.gif);
+}
+
+.stars-bck {
+    background: white;
+}
+
+#left-pane {
     position: relative;
     max-height: 100%;
     overflow: auto;
 }
-#movie-list{
+
+#movie-list {
     max-height: 100vh;
 }
 
 
-#right-pane{
+#right-pane {
     overflow: hidden;
 }

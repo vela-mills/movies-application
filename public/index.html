@@ -14,10 +14,10 @@
             color: orange;
         }
         .card {
-            min-height: 200px;
-            min-width: 200px;
+            /*height: 300px;*/
+            /*width: 200px;*/
             margin-top: 10px;
-            border-radius: 15px;
+            /*border-radius: 15px;*/
         }
         .rcorners1 {
             border-radius: 15px;
@@ -26,6 +26,7 @@
             /*width: 200px;*/
             /*height: 150px;*/
         }
+        .boxLoading {background-image: url(img/Spinner-1s-200px.gif);}
 
     </style>
     <link rel="stylesheet" href="/style.css"/>
@@ -33,35 +34,34 @@
 
 
 </head>
-<body style="background-color: cadetblue">
-<div class="container-fluid">
-    <div class="col-md-12"><h1 style="align-content: center">Movie administrator</h1></div>
-    <div class="col-md-12">
+<body id='test' onload="myFunction()" style="margin:0;">
+<div id="loader"><img src="img/Spinner-1s-200px.gif" alt=""></div>
+<div class="container  mh-100" style="display:none;" id="myDiv">
+    <div class="col-md-12 text-center"><h1 style="align-content: center">MOVIE RATINGS</h1></div>
+    <div  class="col-md-12">
         <div class="alert alert-primary" role="alert" id="loading">
             loading...
         </div>
     </div>
-    <div class="row">
+    <div id="movie-content" class="row">
         <div class="col-md-12">
             <div class="row">
                 <!-- Left side -->
-                <div class="col-md-8">
-                    <div class="row" id="movie-list">
-
+                <div id = "left-pane" class="col-md-8">
+                    <div class="row l mb-3" id="movie-list">
                     </div>
                 </div>
                 <!-- Right side -->
-                <div class="col-md-4">
+                <div class="right-pane col-md-4 mt-3">
                     <div>
                         <div >
 
-                            <form style="background-color: white;" class="rcorners1">
-                                <h5 class="mt-2" style="text-align: center">Add Name</h5>
-                                <label>Name</label>
+                            <form  class="rcorners1">
+                                <h5 class="mt-2" style="text-align: center">ADD NEW MOVIE</h5>
+                                <label>Movie Name</label>
                                 <input class="form-control" type="text" id="movie-name" name="movie-name"><br>
-                                <label>Rating</label>
                                 <input type="hidden" id="rating">
-                                <div>
+                                <div class="text-center h3  mb-3">
                                     <span class="fa fa-star" id="star1" onclick="add(this,1)"></span>
                                     <span class="fa fa-star" id="star2" onclick="add(this,2)"></span>
                                     <span class="fa fa-star" id="star3" onclick="add(this,3)"></span>
@@ -73,14 +73,14 @@
                         </div>
                         <div>
 
-                            <form style="background-color: white" class="rcorners1">
-                                <h5 class="mt-2" style="text-align: center">Update movie</h5>
-                                <label >Name</label>
+                            <form class="rcorners1">
+                                <h5 class="mt-2" style="text-align: center">UPDATE MOVIE</h5>
+                                <label >Movie Name</label>
                                 <input class="form-control" type="text" id="new-name" name="movie-name"><br>
 
                                 <input type="hidden" id="new-rating">
-                                <label >Rating</label>
-                                <div>
+                                <label></label>
+                                <div class="text-center h3 mb-3">
                                     <span class="fa fa-star" id="new-star1" onclick="update(this,1)"></span>
                                     <span class="fa fa-star" id="new-star2" onclick="update(this,2)"></span>
                                     <span class="fa fa-star" id="new-star3" onclick="update(this,3)"></span>
@@ -121,6 +121,16 @@
 
 <script src="./main.js"></script>
 <script>
+    let myVar;
+
+    function myFunction() {
+        myVar = setTimeout(showPage, 5000);
+    }
+
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+    }
     function add(ths, sno) {
 console.log(ths);
 console.log(sno);

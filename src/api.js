@@ -12,8 +12,10 @@ const getMovies = () => {
 const addMovie = (e) => {
     e.preventDefault(); // don't submit the form, we just want to update the data
     let rating = document.getElementById('rating').value;
-    let title = document.getElementById('movie-name').value;
-
+    let title = document.getElementById('movie-name').value.toLowerCase()
+        .split(' ')
+        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+        .join(' ');
     // Get the last id
     let id = 0;
     fetch('/api/movies')
@@ -148,6 +150,7 @@ const getMoviePoster = () => {
     return fetch('/api/movies')
         .then(response => response.json())
         .then(movies => {
+
             // build stars
             movies.forEach(({title}) => {
                 /**
@@ -156,12 +159,14 @@ const getMoviePoster = () => {
                 let newTitle = title.toLowerCase().split(' ').join('+');
                 console.log(newTitle);
                 let urlPoster = "";
+
+
                 fetch(`http://www.omdbapi.com/?t=${newTitle}?&apikey=movieKey`)
                     .then((response) => {
-                        //console.log('found');
                         return response.json();
                     })
                     .then((data) => {
+                        document.getElementById("loader").style.display = 'none';
                         urlPoster = data["Poster"];
                         console.log(urlPoster);
                         moviePosters.push(urlPoster);
@@ -191,10 +196,10 @@ const displayMovies = () => {
             let index = 0;
             movies.forEach(({title, rating, id}) => {
                 html += ` <div class="col-md-4">`;
-                html += `<div class="card" style="width: 12rem;">`;
-                html += `<h5 class="card-body" > ${title} </h5>`;
+                html += `<div class="card border-0" style="width: 12rem;">`;
+                html += `<h5 class="card-title  h3 text-center" > ${title} </h5>`;
+                html += `<div card="card-img-top"><img src="" id="img${id}" style="width: 100%; height: 100%"> </div>`;
 
-                html += `<div card="card-body"><img src="" id="img${id}" style="width: 150px; height: 150px"> </div>`;
                 index++;
                 let starHTML = "";
 
@@ -205,10 +210,10 @@ const displayMovies = () => {
                     starHTML += `<span class="fa fa-star"></span>`;
                 }
 
-                html += ` <div class="card-body"><h5>Rating</h5> ${starHTML} </div>`;
-                html += `<div class="row card-footer" style="margin-left: 0px; margin-right: 0px">`;
-                html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block" id="delete${id}"><i class="fa fa-ban"></i></button></div>`;
-                html += `<div class="col-md-6"><button class="delete-movie btn btn-success btn-lg btn-block " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
+                html += ` <div class="card-body text-md-center pt-0 pb-0"> ${starHTML} </div>`;
+                html += `<div class="row card-body p-0 border-0" style="margin-left: 0px; margin-right: 0px">`;
+                html += `<div class="col-md-6 pl-0"><button class=" btn btn-success btn-lg btn-block movie-button " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
+                html += `<div class="col-md-6 pr-0"><button class=" btn btn-danger btn-lg btn-block movie-button" id="delete${id}"><i class="fa fa-ban"></i></button></div>`;
                 html += `</div>`;
                 html += `</div>`;
                 html += `</div >`;
@@ -244,12 +249,12 @@ const displayMovies = () => {
                 });
             }
         })
-        .then( () => {
+        .then(() => {
             return fetch('/api/movies')
                 .then(response => response.json())
                 .then(movies => {
                     // build stars
-                    movies.forEach(({title, id }) => {
+                    movies.forEach(({title, id}) => {
                         /**
                          * Find url */
                             //console.log(title);
@@ -265,7 +270,7 @@ const displayMovies = () => {
                                 urlPoster = data["Poster"];
                                 console.log(urlPoster);
                                 // Attach the url to the img
-                                document.getElementById(   `img${id}`).src = urlPoster;
+                                document.getElementById(`img${id}`).src = urlPoster;
                             })
                             .catch(
                                 (console.log('no poster')));
@@ -275,6 +280,8 @@ const displayMovies = () => {
                 .catch(console.log('error'));
         })
 };
+
+
 
 /** Export functions to index.js */
 module.exports = {getMovies, addMovie, deleteMovie, updateMovie, displayMovies, moveData};

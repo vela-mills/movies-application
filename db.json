@@ -1,11 +1,6 @@
 {
   "movies": [
     {
-      "title": "Casa Blanca",
-      "rating": "4",
-      "id": 1
-    },
-    {
       "title": "Star Wars",
       "rating": "5",
       "id": 2
@@ -16,19 +11,29 @@
       "id": 3
     },
     {
-      "title": "Sleeping Beauty",
+      "title": "Beauty Shop",
+      "rating": "4",
+      "id": 4
+    },
+    {
+      "title": "Spiderman",
+      "rating": "4",
+      "id": 5
+    },
+    {
+      "title": "Titanic",
+      "rating": "4",
+      "id": 6
+    },
+    {
+      "title": "The Lion King",
       "rating": "4",
       "id": 7
     },
     {
-      "title": "it",
+      "title": "Sleeping Beauty",
       "rating": "3",
       "id": 8
-    },
-    {
-      "title": "lion king",
-      "rating": "5",
-      "id": 9
     }
   ]
 }

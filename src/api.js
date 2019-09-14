@@ -150,25 +150,28 @@ const getMoviePoster = () => {
     return fetch('/api/movies')
         .then(response => response.json())
         .then(movies => {
-
+            // console.log(movies);
             // build stars
             movies.forEach(({title}) => {
                 /**
                  * Find url */
-                    //console.log(title);
+                    // console.log(title);
                 let newTitle = title.toLowerCase().split(' ').join('+');
-                console.log(newTitle);
+                // console.log(newTitle);
                 let urlPoster = "";
 
 
                 fetch(`http://www.omdbapi.com/?t=${newTitle}?&apikey=movieKey`)
                     .then((response) => {
+                        console.log(response);
                         return response.json();
                     })
                     .then((data) => {
                         document.getElementById("loader").style.display = 'none';
+                        //console.log(data);
                         urlPoster = data["Poster"];
                         console.log(urlPoster);
+                        let ratings = data["Ratings"];
                         moviePosters.push(urlPoster);
                     })
                     .catch(
@@ -195,7 +198,7 @@ const displayMovies = () => {
             let html = '';
             let index = 0;
             movies.forEach(({title, rating, id}) => {
-                html += ` <div class="col-md-4">`;
+                html += ` <div class="col-md-4 card">`;
                 html += `<div class="card border-0" style="width: 12rem;">`;
                 html += `<h5 class="card-title  h3 text-center" > ${title} </h5>`;
                 html += `<div card="card-img-top"><img src="" id="img${id}" style="width: 100%; height: 100%"> </div>`;

@@ -8,33 +8,13 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower%7CSource+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-        .checked {
-            color: orange;
-        }
-        .card {
-            /*height: 300px;*/
-            /*width: 200px;*/
-            margin-top: 10px;
-            /*border-radius: 15px;*/
-        }
-        .rcorners1 {
-            border-radius: 15px;
-            /*background: #73AD21;*/
-            /*padding: 20px;*/
-            /*width: 200px;*/
-            /*height: 150px;*/
-        }
-        .boxLoading {background-image: url(img/Spinner-1s-200px.gif);}
-
-    </style>
     <link rel="stylesheet" href="/style.css"/>
+<!--    <script src="src/keys.js"></script>-->
     <script src="../src/keys.js"></script>
 
 
 </head>
-<body id='test' onload="myFunction()" style="margin:0;">
+<body id='test' onload="myFunction()" >
 <div id="loader"><img src="img/Spinner-1s-200px.gif" alt=""></div>
 <div class="container  mh-100" style="display:none;" id="myDiv">
     <div class="col-md-12 text-center"><h1 style="align-content: center">MOVIE RATINGS</h1></div>
@@ -61,7 +41,7 @@
                                 <label>Movie Name</label>
                                 <input class="form-control" type="text" id="movie-name" name="movie-name"><br>
                                 <input type="hidden" id="rating">
-                                <div class="text-center h3  mb-3">
+                                <div class="text-center h3   stars-bck">
                                     <span class="fa fa-star" id="star1" onclick="add(this,1)"></span>
                                     <span class="fa fa-star" id="star2" onclick="add(this,2)"></span>
                                     <span class="fa fa-star" id="star3" onclick="add(this,3)"></span>
@@ -79,8 +59,8 @@
                                 <input class="form-control" type="text" id="new-name" name="movie-name"><br>
 
                                 <input type="hidden" id="new-rating">
-                                <label></label>
-                                <div class="text-center h3 mb-3">
+                                <div class="stars-bck">
+                                <div class="text-center h3 mb-3 stars-bck">
                                     <span class="fa fa-star" id="new-star1" onclick="update(this,1)"></span>
                                     <span class="fa fa-star" id="new-star2" onclick="update(this,2)"></span>
                                     <span class="fa fa-star" id="new-star3" onclick="update(this,3)"></span>
@@ -90,6 +70,7 @@
 
                                 <input type="hidden" id="updateMovieID">
                                 <input class=" btn btn-success btn-lg btn-block" id="update-movie" type="submit"/>
+                                </div>
                             </form>
                         </div>
                         <div>Feature</div>

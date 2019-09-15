@@ -23,8 +23,12 @@ const saveSearchCriteria = (e) => {
 
 const addMovie = (e) => {
     e.preventDefault(); // don't submit the form, we just want to update the data
+    // Display the loader
+    document.getElementById('loader').style.display = 'block';
+    // document.getElementById('loading').style.display = 'none';
+    document.getElementById('myDiv').style.display = 'none';
     let rating = document.getElementById('rating').value;
-    rating = 10;
+   // rating = 10;
     let title = document.getElementById('movie-name').value.toLowerCase()
         .split(' ')
         .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
@@ -79,6 +83,17 @@ const addMovie = (e) => {
 const deleteMovie = (id) => {
     // e.preventDefault(); // don't submit the form, we just want to update the data
     //console.log(id);
+    document.getElementById('loader').style.display = 'block';
+    // document.getElementById('loading').style.display = 'none';
+    document.getElementById('myDiv').style.display = 'none';
+
+    // Clear the add movie
+    document.getElementById('movie-name').value ='';
+    // Clear the rating
+    for (let i = 1; i <= 5; i++) {
+        let cur = document.getElementById("star" + i)
+        cur.className = "fa fa-star";
+    }
     const options = {
         method: 'DELETE',
         headers: {
@@ -101,6 +116,14 @@ const deleteMovie = (id) => {
 
 //Step 1 Move data from display to update form
 const moveData = (id) => {
+    // Clear the add movie
+    document.getElementById('movie-name').value ='';
+    // Clear the rating
+    for (let i = 1; i <= 5; i++) {
+        let cur = document.getElementById("star" + i)
+        cur.className = "fa fa-star";
+    }
+
     return fetch(`/api/movies/${id}`)
         .then(response => response.json())
         .then(movie => {
@@ -111,18 +134,18 @@ const moveData = (id) => {
             document.getElementById("new-rating").value = rating;
             document.getElementById("updateMovieID").value = id;
 
-            // //changes stars to black
-            // for (let i = 1; i <= 5; i++) {
-            //     let cur = document.getElementById("new-star" + i)
-            //     cur.className = "fa fa-star"
-            // }
-            // //change stars to orange
-            // for (let i = 1; i <= rating; i++) {
-            //     let cur = document.getElementById("new-star" + i)
-            //     if (cur.className == "fa fa-star") {
-            //         cur.className = "fa fa-star checked"
-            //     }
-            // }
+            //changes stars to black
+            for (let i = 1; i <= 5; i++) {
+                let cur = document.getElementById("new-star" + i)
+                cur.className = "fa fa-star"
+            }
+            //change stars to orange
+            for (let i = 1; i <= rating; i++) {
+                let cur = document.getElementById("new-star" + i)
+                if (cur.className == "fa fa-star") {
+                    cur.className = "fa fa-star checked"
+                }
+            }
         });
 };
 
@@ -132,7 +155,11 @@ const updateMovie = (e) => {
     let rating = document.getElementById('new-rating').value;
     let title = document.getElementById('new-name').value.trim();
     let id = document.getElementById("updateMovieID").value;
-    rating = 10;
+    /** Hide  loading gif after page display */
+    document.getElementById('loader').style.display = 'block';
+    // document.getElementById('loading').style.display = 'none';
+    document.getElementById('myDiv').style.display = 'none';
+    //rating = 10;
     // Create the new movie object
     const updateMovie = {
         title,
@@ -195,7 +222,7 @@ const displayMovies = () => {
                         starHTML += `<span class="fa fa-star"></span>`;
                     }
 
-                    html += ` <div class="card-body text-md-center pt-0 pb-0" id="star${id}"> ${starHTML} </div>`;
+                    html += ` <div class="card-body text-md-center pt-0 pb-0" id="dStar${id}"> ${starHTML} </div>`;
                     html += `<div class="row card-body p-0 border-0" style="margin-left: 0px; margin-right: 0px">`;
                     html += `<div class="col-md-6 pl-0"><button class=" btn btn-success btn-lg btn-block movie-button " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
                     html += `<div class="col-md-6 pr-0"><button class=" btn btn-danger btn-lg btn-block movie-button" id="delete${id}"><i class="fa fa-ban"></i></button></div>`;
@@ -240,12 +267,14 @@ const displayMovies = () => {
                             let size = movies.length-2;
                             // build stars
                             movies.forEach(({title, id}) => {
-                                console.log(size);
-                                console.log(id);
+                                //console.log(size);
+                                //console.log(id);
                                 if (size === id) {
 
                                     /** Hide  loading gif after page display */
+                                    document.getElementById('loader').style.display = 'none';
                                     document.getElementById('loading').style.display = 'none';
+                                    document.getElementById('myDiv').style.display = 'block';
 
                                 }
                                 /**
@@ -304,24 +333,25 @@ const displayMovies = () => {
                                         if (includeMovie) {
 
                                             //Rated
-                                            let ratings = data["Ratings"];
-                                            //console.log(ratings);
-                                            let rating = ratings[0];
-                                            //console.log(rating["Value"]);
-                                            rating = parseFloat(rating["Value"]);
-                                            let starHTML = "";
+                                            // let ratings = data["Ratings"];
+                                            // //console.log(ratings);
+                                            // let rating = ratings[0];
+                                            // //console.log(rating["Value"]);
+                                            // rating = parseFloat(rating["Value"]);
+                                            // let starHTML = "";
 
-                                            /** Movie poster */
 
-                                            for (let i = 0; i < rating; i++) {
-                                                starHTML += `<span class="fa fa-star checked" style="font-size: 12px"></span>`;
-                                            }
-                                            for (let i = rating; i < 10; i++) {
-                                                starHTML += `<span class="fa fa-star" style="font-size: 11px"></span>`;
-                                            }
-                                            //console.log(starHTML);
-                                            document.getElementById(`star${id}`).innerHTML = starHTML;
+
+                                            // for (let i = 0; i < rating; i++) {
+                                            //     starHTML += `<span class="fa fa-star checked" style="font-size: 12px"></span>`;
+                                            // }
+                                            // for (let i = rating; i < 10; i++) {
+                                            //     starHTML += `<span class="fa fa-star" style="font-size: 11px"></span>`;
+                                            // }
+                                            // //console.log(starHTML);
+                                            // document.getElementById(`star${id}`).innerHTML = starHTML;
                                             // document.getElementById("demo").innerHTML = "Paragraph changed!"
+                                            /** Movie poster */
                                             // Attach the url to the img
                                             document.getElementById(`img${id}`).src = urlPoster;
                                             //return [movieRated, currentGenre];

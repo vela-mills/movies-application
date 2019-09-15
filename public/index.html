@@ -15,7 +15,7 @@
 
 
 </head>
-<body id='test' onload="myFunction()">
+<body id='test' >
 <div id="loader"><img src="img/Spinner-1s-200px.gif" alt=""></div>
 <div class="container  mh-100" style="display:none;" id="myDiv">
     <div class="col-md-12 text-center"><h1 style="align-content: center">MOVIE RATINGS</h1></div>
@@ -37,24 +37,18 @@
                     <div>
                         <div>
 
-                            <form class="rcorners1">
+                            <form  class="rcorners1">
                                 <h5 class="mt-2" style="text-align: center">ADD NEW MOVIE</h5>
                                 <label>Movie Name</label>
-                                <input class="form-control" type="text" id="movie-name" name="movie-name">
-                                <br>
+                                <input class="form-control" type="text" id="movie-name" name="movie-name"><br>
                                 <input type="hidden" id="rating">
-                                <!--                                <div class="text-center h3   stars-bck">-->
-                                <!--                                    <span class="fa fa-star" id="star1" onclick="add(this,1)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star2" onclick="add(this,2)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star3" onclick="add(this,3)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star4" onclick="add(this,4)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star5" onclick="add(this,5)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star6" onclick="add(this,6)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star7" onclick="add(this,7)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star8" onclick="add(this,8)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star9" onclick="add(this,9)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="star10" onclick="add(this,10)"></span>-->
-                                <!--                                </div>-->
+                                <div class="text-center h3  mb-3">
+                                    <span class="fa fa-star" id="star1" onclick="add(this,1)"></span>
+                                    <span class="fa fa-star" id="star2" onclick="add(this,2)"></span>
+                                    <span class="fa fa-star" id="star3" onclick="add(this,3)"></span>
+                                    <span class="fa fa-star" id="star4" onclick="add(this,4)"></span>
+                                    <span class="fa fa-star" id="star5" onclick="add(this,5)"></span>
+                                </div>
                                 <input class=" btn btn-success btn-lg btn-block" id="add-movie" type="submit"/>
                             </form>
                         </div>
@@ -62,27 +56,21 @@
 
                             <form class="rcorners1" id="update-form" style="display: none">
                                 <h5 class="mt-2" style="text-align: center">UPDATE MOVIE</h5>
-                                <label>Movie Name</label>
+                                <label >Movie Name</label>
                                 <input class="form-control" type="text" id="new-name" name="movie-name"><br>
 
                                 <input type="hidden" id="new-rating">
-                                <!--                                <div class="stars-bck">-->
-                                <!--                                <div class="text-center h3 mb-3 stars-bck">-->
-                                <!--                                    <span class="fa fa-star" id="new-star1" onclick="update(this,1)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star2" onclick="update(this,2)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star3" onclick="update(this,3)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star4" onclick="update(this,4)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star5" onclick="update(this,5)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star6" onclick="update(this,1)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star7" onclick="update(this,2)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star8" onclick="update(this,3)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star9" onclick="update(this,4)"></span>-->
-                                <!--                                    <span class="fa fa-star" id="new-star10" onclick="update(this,5)"></span>-->
-                                <!--                                </div>-->
+                                <label></label>
+                                <div class="text-center h3 mb-3">
+                                    <span class="fa fa-star" id="new-star1" onclick="update(this,1)"></span>
+                                    <span class="fa fa-star" id="new-star2" onclick="update(this,2)"></span>
+                                    <span class="fa fa-star" id="new-star3" onclick="update(this,3)"></span>
+                                    <span class="fa fa-star" id="new-star4" onclick="update(this,4)"></span>
+                                    <span class="fa fa-star" id="new-star5" onclick="update(this,5)"></span>
+                                </div>
 
                                 <input type="hidden" id="updateMovieID">
-                                <input class=" btn btn-success btn-lg btn-block" id="update-movie" type="submit" />
-
+                                <input class=" btn btn-success btn-lg btn-block" id="update-movie" type="submit"/>
                             </form>
                         </div>
 
@@ -93,12 +81,14 @@
                                 <div><label>Rating</label></div>
                                 <div id="search-rating">
                                     <div id="movie-rating">
-                                        <div><input type="checkbox" value="G" id="G" class="rating" name="rating">&nbsp;<label for="G"> G</label> </div>
+                                        <div><input type="checkbox" value="G" id="G" class="rating" name="rating">&nbsp;<label
+                                                for="G"> G</label></div>
                                         <div><input type="checkbox" value="N/A" id="NA" class="rating" name="rating">&nbsp;<label
                                                 for="NA"> N/A</label></div>
                                         <div><input type="checkbox" value="PG" id="PG" class="rating" name="rating">&nbsp;<label
                                                 for="PG">PG</label></div>
-                                        <div><input type="checkbox" value="PG-13" id="PG13" class="rating" name="rating">&nbsp;<label
+                                        <div><input type="checkbox" value="PG-13" id="PG13" class="rating"
+                                                    name="rating">&nbsp;<label
                                                 for="PG13">PG-13</label></div>
                                         <input type="hidden" id="selectedRating" value="">
                                     </div>
@@ -110,20 +100,24 @@
                                             <div><input type="checkbox" value="Adventure" id="Adventure" class="genre">&nbsp;<label
                                                     for="Adventure">Adventure</label>
                                             </div>
-                                            <div><input type="checkbox" value="Drama" id="Drama" class="genre">&nbsp;<label
+                                            <div><input type="checkbox" value="Drama" id="Drama"
+                                                        class="genre">&nbsp;<label
                                                     for="Drama">Drama</label>
                                             </div>
                                             <div><input type="checkbox" value="Fantasy" id="Fantasy" class="genre">&nbsp;<label
                                                     for="Fantasy">Fantasy</label>
 
                                             </div>
-                                            <div><input type="checkbox" value="Sci-Fi" id="Sci-Fi" class="genre">&nbsp;<label
+                                            <div><input type="checkbox" value="Sci-Fi" id="Sci-Fi"
+                                                        class="genre">&nbsp;<label
                                                     for="Sci-Fi">Sci-Fi</label>
                                             </div>
-                                            <div><input type="checkbox" value="Comedy" id="Comedy" class="genre">&nbsp;<label
+                                            <div><input type="checkbox" value="Comedy" id="Comedy"
+                                                        class="genre">&nbsp;<label
                                                     for="Comedy">Comedy</label>
                                             </div>
-                                            <div><input type="checkbox" value="Short" id="Short" class="genre">&nbsp;<label
+                                            <div><input type="checkbox" value="Short" id="Short"
+                                                        class="genre">&nbsp;<label
                                                     for="Short">Short</label>
                                             </div>
                                             <div><input type="checkbox" value="Romance" id="Romance" class="genre">&nbsp;<label
@@ -244,40 +238,39 @@
     });
 
 
-    // function add(ths, sno) {
-    //     console.log(ths);
-    //     console.log(sno);
-    //     for (var i = 1; i <= 5; i++) {
-    //         var cur = document.getElementById("star" + i)
-    //         cur.className = "fa fa-star"
-    //     }
-    //
-    //     for (var i = 1; i <= sno; i++) {
-    //         var cur = document.getElementById("star" + i)
-    //         if (cur.className == "fa fa-star") {
-    //             cur.className = "fa fa-star checked"
-    //         }
-    //     }
-    //     document.getElementById('rating').value = sno;
-    // }
-    //
-    // function update(ths, sno) {
-    //     console.log(ths);
-    //     console.log(sno);
-    //     //turns stars to black
-    //     for (var i = 1; i <= 5; i++) {
-    //         var cur = document.getElementById("new-star" + i)
-    //         cur.className = "fa fa-star"
-    //     }
-    //     //change stars to orange
-    //     for (var i = 1; i <= sno; i++) {
-    //         var cur = document.getElementById("new-star" + i)
-    //         if (cur.className == "fa fa-star") {
-    //             cur.className = "fa fa-star checked"
-    //         }
-    //     }
-    //     document.getElementById('new-rating').value = sno;
-    // }
+    function add(ths, sno) {
+        console.log(ths);
+        console.log(sno);
+        for (var i = 1; i <= 5; i++) {
+            var cur = document.getElementById("star" + i)
+            cur.className = "fa fa-star"
+        }
+        for (var i = 1; i <= sno; i++) {
+            var cur = document.getElementById("star" + i)
+            if (cur.className == "fa fa-star") {
+                cur.className = "fa fa-star checked"
+            }
+        }
+        document.getElementById('rating').value = sno;
+    }
+
+    function update(ths, sno) {
+        //console.log(ths);
+        //console.log(sno);
+        //turns stars to black
+        for (var i = 1; i <= 5; i++) {
+            var cur = document.getElementById("new-star" + i)
+            cur.className = "fa fa-star"
+        }
+        //change stars to orange
+        for (var i = 1; i <= sno; i++) {
+            var cur = document.getElementById("new-star" + i)
+            if (cur.className == "fa fa-star") {
+                cur.className = "fa fa-star checked"
+            }
+        }
+        document.getElementById('new-rating').value = sno;
+    }
 </script>
 
 </body>

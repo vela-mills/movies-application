@@ -17,6 +17,22 @@ const saveSearchCriteria = (e) => {
     //console.log('search ' + includeMovieRatings );
 }
 
+function displaySpinner(){
+    document.getElementById('loader').style.display = 'block';
+    // document.getElementById('loading').style.display = 'none';
+    document.getElementById('myDiv').style.display = 'none';
+}
+
+function clearAddMovie(){
+    // Clear the add movie
+    document.getElementById('movie-name').value ='';
+    // Clear the rating
+    for (let i = 1; i <= 5; i++) {
+        let cur = document.getElementById("star" + i)
+        cur.className = "fa fa-star";
+    }
+}
+
 /**
  * Add a movie to the database
  * */
@@ -24,9 +40,7 @@ const saveSearchCriteria = (e) => {
 const addMovie = (e) => {
     e.preventDefault(); // don't submit the form, we just want to update the data
     // Display the loader
-    document.getElementById('loader').style.display = 'block';
-    // document.getElementById('loading').style.display = 'none';
-    document.getElementById('myDiv').style.display = 'none';
+   displaySpinner();
     let rating = document.getElementById('rating').value;
    // rating = 10;
     let title = document.getElementById('movie-name').value.toLowerCase()
@@ -34,6 +48,8 @@ const addMovie = (e) => {
         .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
         .join(' ');
     // Get the last id
+    console.log(`Add movie title ${title} rating ${rating}`);
+    clearAddMovie();
     let id = 0;
     fetch('/api/movies')
         .then(response => response.json())
@@ -83,17 +99,10 @@ const addMovie = (e) => {
 const deleteMovie = (id) => {
     // e.preventDefault(); // don't submit the form, we just want to update the data
     //console.log(id);
-    document.getElementById('loader').style.display = 'block';
-    // document.getElementById('loading').style.display = 'none';
-    document.getElementById('myDiv').style.display = 'none';
-
+    // Display the spinner
+    //displaySpinner()
     // Clear the add movie
-    document.getElementById('movie-name').value ='';
-    // Clear the rating
-    for (let i = 1; i <= 5; i++) {
-        let cur = document.getElementById("star" + i)
-        cur.className = "fa fa-star";
-    }
+    clearAddMovie()
     const options = {
         method: 'DELETE',
         headers: {
@@ -116,13 +125,6 @@ const deleteMovie = (id) => {
 
 //Step 1 Move data from display to update form
 const moveData = (id) => {
-    // Clear the add movie
-    document.getElementById('movie-name').value ='';
-    // Clear the rating
-    for (let i = 1; i <= 5; i++) {
-        let cur = document.getElementById("star" + i)
-        cur.className = "fa fa-star";
-    }
 
     return fetch(`/api/movies/${id}`)
         .then(response => response.json())
@@ -155,10 +157,12 @@ const updateMovie = (e) => {
     let rating = document.getElementById('new-rating').value;
     let title = document.getElementById('new-name').value.trim();
     let id = document.getElementById("updateMovieID").value;
+    clearAddMovie();
     /** Hide  loading gif after page display */
-    document.getElementById('loader').style.display = 'block';
-    // document.getElementById('loading').style.display = 'none';
-    document.getElementById('myDiv').style.display = 'none';
+    displaySpinner();
+    // document.getElementById('loader').style.display = 'block';
+    // // document.getElementById('loading').style.display = 'none';
+    // document.getElementById('myDiv').style.display = 'none';
     //rating = 10;
     // Create the new movie object
     const updateMovie = {
@@ -243,8 +247,10 @@ const displayMovies = () => {
                     document.getElementById(`delete${idArray[i]}`).addEventListener('click', event => {
                         //alert('Hello');
                         //console.log(idArray[i]);
+                        let elem = document.getElementById(`movie${idArray[i]}`);
+                        elem.parentNode.removeChild(elem);
                         deleteMovie(idArray[i]);
-                        displayMovies();
+                        //displayMovies();
                     });
                 }
 
@@ -255,7 +261,7 @@ const displayMovies = () => {
                         //console.log(event);
                         document.getElementById('update-form').style.display = 'block';
                         moveData(idArray[i]);
-                        displayMovies();
+                        //displayMovies();
                     });
                 }
             })

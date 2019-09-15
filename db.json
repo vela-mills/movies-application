@@ -7,7 +7,7 @@
     },
     {
       "title": "Snow White",
-      "rating": "5",
+      "rating": "4",
       "id": 3
     },
     {
@@ -39,11 +39,6 @@
       "title": "Little Red",
       "rating": "4",
       "id": 9
-    },
-    {
-      "title": "Thelma",
-      "rating": "3",
-      "id": 10
     }
   ]
 }

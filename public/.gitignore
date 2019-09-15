@@ -2,3 +2,4 @@ main.js
 *.map
 package-lock.jsons
 node_modules/*
+keys.js

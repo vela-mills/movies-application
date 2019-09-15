@@ -50,6 +50,10 @@ form h5 {
     line-height: .5em;
 }
 
+.orange {
+    color: orange;
+}
+
 /*.container {*/
 /*    position: relative;*/
 /*    top: 50%;*/

@@ -43,6 +43,7 @@ form h5 {
 
 .card-title {
     color: #3F3C3C;
+    text-shadow:1px 1px lightgrey;
 }
 
 .card-footer {

@@ -29,21 +29,6 @@
       "title": "The Lion King",
       "rating": "4",
       "id": 7
-    },
-    {
-      "title": "Sleeping Beauty",
-      "rating": "3",
-      "id": 8
-    },
-    {
-      "title": "Little Red",
-      "rating": "4",
-      "id": 9
-    },
-    {
-      "title": "Thelma",
-      "rating": "3",
-      "id": 10
     }
   ]
 }

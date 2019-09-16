@@ -34,8 +34,11 @@ form h5 {
 
 .card {
     background-color: #F4F1F1;
-    margin: 5px;
+
     border: 5px solid #259A36;
+
+    margin-right: 7em;
+    margin-bottom: 2em;
 }
 
 .card-title {

@@ -6,31 +6,32 @@ const getMovies = () => {
         .then(response => response.json());
 };
 
-let includeMovieGenre = "";
-let includeMovieRatings = "";
 
-const saveSearchCriteria = (e) => {
-    e.preventDefault(); // don't submit the form, we just want to update the data
-    includeMovieGenre = document.getElementById('selectedGenre').value;
-    includeMovieRatings = document.getElementById('selectedRating').value;
-    //console.log('search ' + includeMovieGenre );
-    //console.log('search ' + includeMovieRatings );
-}
-
-function displaySpinner(){
+function displaySpinner() {
     document.getElementById('loader').style.display = 'block';
     // document.getElementById('loading').style.display = 'none';
     document.getElementById('myDiv').style.display = 'none';
 }
 
-function clearAddMovie(){
+function clearAddMovie() {
     // Clear the add movie
-    document.getElementById('movie-name').value ='';
+    document.getElementById('movie-name').value = '';
     // Clear the rating
     for (let i = 1; i <= 5; i++) {
         let cur = document.getElementById("star" + i)
         cur.className = "fa fa-star";
     }
+}
+
+const getMovieInfo = (title) => {
+    /**
+     * Find url */
+    console.log(title);
+    let newTitle = title.split(' ').join('+');
+    console.log(newTitle);
+
+    return fetch(`http://www.omdbapi.com/?t=${newTitle}?&apikey=63c8d483`)
+        .then(response => response.json());
 }
 
 /**
@@ -40,9 +41,9 @@ function clearAddMovie(){
 const addMovie = (e) => {
     e.preventDefault(); // don't submit the form, we just want to update the data
     // Display the loader
-   displaySpinner();
+    displaySpinner();
     let rating = document.getElementById('rating').value;
-   // rating = 10;
+    // rating = 10;
     let title = document.getElementById('movie-name').value.toLowerCase()
         .split(' ')
         .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
@@ -67,26 +68,50 @@ const addMovie = (e) => {
 
         });
 
-    // Create the new movie object
-    const newMovie = {
-        title,
-        rating,
-        id
-    };
-    //console.log(newMovie);
-    // Add the new movie to the array
+    let urlPoster = "";
+    let movieRated = "";
+    let currentGenre = "";
+    let year = "";
+    getMovieInfo(title).then((data) => {
+        console.log(data);
+        urlPoster = data["Poster"];
+        movieRated = data["Rated"];
+        currentGenre = data["Genre"];
+        year = data["Year"];
 
-    const url = '/api/movies';
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newMovie),
-    };
-    fetch(url, options)
-        .then(/* post was created successfully */)
-        .catch(/* handle errors */);
+        let genre = currentGenre.split(",");
+        let title = data["Title"];
+
+        console.log(urlPoster);
+        console.log(movieRated);
+        console.log(currentGenre);
+        console.log(year)
+        // Create the new movie object
+        const newMovie = {
+            id,
+            title,
+            rating,
+            movieRated,
+            genre,
+            year,
+            urlPoster
+        };
+        //console.log(newMovie);
+        // Add the new movie to the array
+
+        const url = '/api/movies';
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newMovie),
+        };
+        fetch(url, options)
+            .then(/* post was created successfully */)
+            .catch(/* handle errors */);
+    })
+        .catch(console.log('error'));
 
 
 };
@@ -94,13 +119,11 @@ const addMovie = (e) => {
 /**
  * Delete movie
  *
- */
+ **/
 
 const deleteMovie = (id) => {
     // e.preventDefault(); // don't submit the form, we just want to update the data
-    //console.log(id);
-    // Display the spinner
-    //displaySpinner()
+
     // Clear the add movie
     clearAddMovie()
     const options = {
@@ -138,12 +161,12 @@ const moveData = (id) => {
 
             //changes stars to black
             for (let i = 1; i <= 5; i++) {
-                let cur = document.getElementById("new-star" + i)
+                let cur = document.getElementById("update-star" + i)
                 cur.className = "fa fa-star"
             }
             //change stars to orange
             for (let i = 1; i <= rating; i++) {
-                let cur = document.getElementById("new-star" + i)
+                let cur = document.getElementById("update-star" + i)
                 if (cur.className == "fa fa-star") {
                     cur.className = "fa fa-star checked"
                 }
@@ -158,227 +181,83 @@ const updateMovie = (e) => {
     let title = document.getElementById('new-name').value.trim();
     let id = document.getElementById("updateMovieID").value;
     clearAddMovie();
+   // console.log(rating);
     /** Hide  loading gif after page display */
-    displaySpinner();
-    // document.getElementById('loader').style.display = 'block';
-    // // document.getElementById('loading').style.display = 'none';
-    // document.getElementById('myDiv').style.display = 'none';
-    //rating = 10;
-    // Create the new movie object
-    const updateMovie = {
-        title,
-        rating,
-        id
-    };
-    //console.log(updateMovie);
+    //displaySpinner();
+
+
+    //Hide Update movie
     document.getElementById('update-form').style.display = 'none';
-    // Add the new movie to the array
+
+    let urlPoster = "";
+    let movieRated = "";
+    let currentGenre = "";
+    let year = "";
+    getMovieInfo(title).then((data) => {
+        console.log(data);
+        urlPoster = data["Poster"];
+        movieRated = data["Rated"];
+        currentGenre = data["Genre"];
+        year = data["Year"];
+        document.getElementById(`img${id}`).setAttribute("src", urlPoster);
+
+        // Update the star rating
+        let starHTML = "";
+
+        for (let i = 0; i < rating; i++) {
+            starHTML += `<span class="fa fa-star checked"></span>`;
+        }
+        for (let i = rating; i < 5; i++) {
+            starHTML += `<span class="fa fa-star"></span>`;
+        }
+
+        document.getElementById(`dStar${id}`).innerHTML = starHTML;
+        let genre = "";
+        if (typeof genre != "undefined") genre = currentGenre.split(",");
+        let title = data["Title"];
+
+        const updateMovie = {
+            id,
+            title,
+            rating,
+            movieRated,
+            genre,
+            year,
+            urlPoster
+        };
+        // Add the new movie to the array
 
 
-    const url = `/api/movies/${id}`;
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updateMovie),
-    };
-    fetch(url, options)
-        .then(/* post was created successfully */)
-        .catch(/* handle errors */);
-};
+        const url = `/api/movies/${id}`;
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateMovie),
+        };
+        fetch(url, options)
+            .then(/* post was created successfully */)
+            .catch(/* handle errors */);
+    });
 
-/**
- * Get current selections
- */
-
-// const = getCurrentSelection() => {
-//
-// }
+}
 /**
  *
  * Display movies
  */
 
-const displayMovies = () => {
-        let idArray = [];
-
-        return fetch('/api/movies')
-            .then(response => response.json())
-            .then(movies => {
-                // build stars
-
-                let html = '';
-                let index = 0;
-                movies.forEach(({title, rating, id}) => {
-                    html += ` <div class="col-md-4 card" id="movie${id}">`;
-                    html += `<div class="card border-0" style="width: 12rem;">`;
-                    html += `<h5 class="card-title  h3 text-center" > ${title} </h5>`;
-                    html += `<div card="card-img-top"><img src="" id="img${id}" style="width: 100%; height: 100%"> </div>`;
-
-                    index++;
-                    let starHTML = "";
-
-                    for (let i = 0; i < rating; i++) {
-                        starHTML += `<span class="fa fa-star checked"></span>`;
-                    }
-                    for (let i = rating; i < 5; i++) {
-                        starHTML += `<span class="fa fa-star"></span>`;
-                    }
-
-                    html += ` <div class="card-body text-md-center pt-0 pb-0" id="dStar${id}"> ${starHTML} </div>`;
-                    html += `<div class="row card-body p-0 border-0" style="margin-left: 0px; margin-right: 0px">`;
-                    html += `<div class="col-md-6 pl-0"><button class=" btn btn-success btn-lg btn-block movie-button " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
-                    html += `<div class="col-md-6 pr-0"><button class=" btn btn-danger btn-lg btn-block movie-button" id="delete${id}"><i class="fa fa-ban"></i></button></div>`;
-                    html += `</div>`;
-                    html += `</div>`;
-                    html += `</div >`;
-                    idArray.push(id);
-                });
-                // console.log(html);
-
-                /**Display movies on screen*/
-                document.getElementById('movie-list').innerHTML = html;
-
-                /**Add Event listeners*/
-
-                //delete event listener
-                for (let i = 0; i < idArray.length; i++) {
-                    document.getElementById(`delete${idArray[i]}`).addEventListener('click', event => {
-                        //alert('Hello');
-                        //console.log(idArray[i]);
-                        let elem = document.getElementById(`movie${idArray[i]}`);
-                        elem.parentNode.removeChild(elem);
-                        deleteMovie(idArray[i]);
-                        //displayMovies();
-                    });
-                }
-
-                //update event listener
-                for (let i = 0; i < idArray.length; i++) {
-                    document.getElementById(`update${idArray[i]}`).addEventListener('click', event => {
-                        //alert('Hello');
-                        //console.log(event);
-                        document.getElementById('update-form').style.display = 'block';
-                        moveData(idArray[i]);
-                        //displayMovies();
-                    });
-                }
-            })
-            .then(() => {
-                    return fetch('/api/movies')
-                        .then(response => response.json())
-                        .then(movies => {
-
-                            let size = movies.length-2;
-                            // build stars
-                            movies.forEach(({title, id}) => {
-                                //console.log(size);
-                                //console.log(id);
-                                if (size === id) {
-
-                                    /** Hide  loading gif after page display */
-                                    document.getElementById('loader').style.display = 'none';
-                                    document.getElementById('loading').style.display = 'none';
-                                    document.getElementById('myDiv').style.display = 'block';
-
-                                }
-                                /**
-                                 * Find url */
-                                    //console.log(title);
-                                let newTitle = title.toLowerCase().split(' ').join('+');
-                                // console.log(newTitle);
-                                let urlPoster = "";
-
-                                fetch(`http://www.omdbapi.com/?t=${newTitle}?&apikey=63c8d483`)
-                                    .then((response) => {
-                                        //console.log('found');
-                                        return response.json();
-                                    })
-                                    .then((data) => {
-                                        //console.log(data);
-                                        urlPoster = data["Poster"];
-                                        // console.log(urlPoster);
-
-
-                                        let movieRated = data["Rated"];
-
-                                        let currentGenre = data["Genre"];
-
-                                        let movieGenres = currentGenre.split(',');
-
-                                        let includeMovie = false;
-
-
-                                        let movieGenreList = includeMovieGenre.toLowerCase().split(',');
-                                        if (includeMovieGenre.length > 0) {
-                                            movieGenres.forEach(function (item) {
-                                                //console.log(item);
-                                                ////// console.log(movieGenreList);
-                                                if (movieGenreList.indexOf(item.toLowerCase().trim()) >= 0) {
-                                                    includeMovie = true;
-                                                    //console.log('found');
-                                                }
-                                            })
-
-                                        } else {
-                                            includeMovie = true;
-                                        }
-
-
-                                        if (includeMovie) {
-                                            if (includeMovieRatings.length > 0) {
-                                                if (includeMovieRatings.toLowerCase().indexOf(movieRated.toLowerCase()) < 0) {
-                                                    includeMovie = false;
-                                                }
-                                            }
-                                        }
-
-                                        //}
-                                        //console.log(includeMovie);
-                                        if (includeMovie) {
-
-                                            //Rated
-                                            // let ratings = data["Ratings"];
-                                            // //console.log(ratings);
-                                            // let rating = ratings[0];
-                                            // //console.log(rating["Value"]);
-                                            // rating = parseFloat(rating["Value"]);
-                                            // let starHTML = "";
-
-
-
-                                            // for (let i = 0; i < rating; i++) {
-                                            //     starHTML += `<span class="fa fa-star checked" style="font-size: 12px"></span>`;
-                                            // }
-                                            // for (let i = rating; i < 10; i++) {
-                                            //     starHTML += `<span class="fa fa-star" style="font-size: 11px"></span>`;
-                                            // }
-                                            // //console.log(starHTML);
-                                            // document.getElementById(`star${id}`).innerHTML = starHTML;
-                                            // document.getElementById("demo").innerHTML = "Paragraph changed!"
-                                            /** Movie poster */
-                                            // Attach the url to the img
-                                            document.getElementById(`img${id}`).src = urlPoster;
-                                            //return [movieRated, currentGenre];
-                                        } else {
-                                            console.log(`delete movie ${id}`);
-                                            let element = document.getElementById(`movie${id}`);
-                                            element.parentNode.removeChild(element);
-                                        }
-                                    })
-
-                                    .catch(
-                                        (console.log('no poster')));
-
-                            });
-                        })
-                        .catch(console.log('error'));
-                }
-            )
-    }
-;
+const getMovieList = () => {
+   // let idArray = [];
+    return fetch('/api/movies')
+        .then(response => response.json())
+        .catch("Error move ")
+    // .then(movies => {
+    //
+    // )
+};
 
 
 /** Export functions to index.js */
-module.exports = {getMovies, addMovie, deleteMovie, updateMovie, displayMovies, moveData, saveSearchCriteria};
+module.exports = {getMovies, addMovie, deleteMovie, updateMovie, getMovieList, moveData};
+//module.exports = {deleteMovie, moveData}

@@ -1,34 +1,45 @@
 {
   "movies": [
     {
-      "title": "Star Wars",
+      "id": 14,
+      "title": "Sleeping Beauty",
+      "rating": "3",
+      "movieRated": "G",
+      "genre": [
+        "Animation",
+        " Family",
+        " Fantasy",
+        " Musical",
+        " Romance"
+      ],
+      "year": "1959",
+      "urlPoster": "https://m.media-amazon.com/images/M/MV5BOTJmZjA3MjMtMWNmZS00YTliLWFhMWUtZDU2NGJhNTlmY2ZkL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+    },
+    {
+      "id": 15,
+      "title": "Batman Begins",
       "rating": "5",
-      "id": 2
+      "movieRated": "PG-13",
+      "genre": [
+        "Action",
+        " Adventure"
+      ],
+      "year": "2005",
+      "urlPoster": "https://m.media-amazon.com/images/M/MV5BZmUwNGU2ZmItMmRiNC00MjhlLTg5YWUtODMyNzkxODYzMmZlXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg"
     },
     {
-      "title": "Snow White",
-      "rating": "5",
-      "id": 3
-    },
-    {
-      "title": "Beauty Shop",
+      "id": 16,
+      "title": "Little Red Riding Rabbit",
       "rating": "4",
-      "id": 4
-    },
-    {
-      "title": "Spiderman",
-      "rating": "4",
-      "id": 5
-    },
-    {
-      "title": "Titanic",
-      "rating": "4",
-      "id": 6
-    },
-    {
-      "title": "The Lion King",
-      "rating": "4",
-      "id": 7
+      "movieRated": "Approved",
+      "genre": [
+        "Family",
+        " Animation",
+        " Short",
+        " Comedy"
+      ],
+      "year": "1944",
+      "urlPoster": "https://m.media-amazon.com/images/M/MV5BZWMwMTBkMGItNzYxYi00YzYzLWE1ZTYtZTM1OTNmM2I4MDc4XkEyXkFqcGdeQXVyNjc2NTQzMjU@._V1_SX300.jpg"
     }
   ]
 }

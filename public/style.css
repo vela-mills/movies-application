@@ -36,11 +36,15 @@ form h5 {
     background-color: #F4F1F1;
 
     border: 5px solid #259A36;
-
+    width: 12em;
     margin-right: 7em;
     margin-bottom: 2em;
 }
 
+img {
+    width: 75px;
+    max-width: 250px;
+}
 .card-title {
     color: #3F3C3C;
     text-shadow:1px 1px lightgrey;
@@ -74,6 +78,10 @@ form h5 {
 
 .card-body {
     font-size: 2em;
+}
+
+.star-size {
+    font-size: 1.2em;
 }
 
 .rcorners1 {

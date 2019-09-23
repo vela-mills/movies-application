@@ -40,35 +40,6 @@
       ],
       "year": "1944",
       "urlPoster": "https://m.media-amazon.com/images/M/MV5BZWMwMTBkMGItNzYxYi00YzYzLWE1ZTYtZTM1OTNmM2I4MDc4XkEyXkFqcGdeQXVyNjc2NTQzMjU@._V1_SX300.jpg"
-    },
-    {
-      "id": 17,
-      "title": "The Lion King",
-      "rating": "5",
-      "movieRated": "G",
-      "genre": [
-        "Animation",
-        " Adventure",
-        " Drama",
-        " Family",
-        " Musical"
-      ],
-      "year": "1994",
-      "urlPoster": "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_SX300.jpg"
-    },
-    {
-      "id": 18,
-      "title": "Snow White and the Huntsman",
-      "rating": "5",
-      "movieRated": "PG-13",
-      "genre": [
-        "Action",
-        " Adventure",
-        " Drama",
-        " Fantasy"
-      ],
-      "year": "2012",
-      "urlPoster": "https://m.media-amazon.com/images/M/MV5BMTQ1NDA0MTk5OV5BMl5BanBnXkFtZTcwMTM4NDMwNw@@._V1_SX300.jpg"
     }
   ]
 }

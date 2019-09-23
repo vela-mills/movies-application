@@ -126,6 +126,12 @@ const deleteMovie = (id) => {
 
     // Clear the add movie
     clearAddMovie()
+    //document.getElementById('movie-name').value ='';
+    // Clear the rating
+    //for (let i = 1; i <= 5; i++) {
+    //    let cur = document.getElementById("star" + i);
+    //    cur.className = "fa fa-star";
+    //}
     const options = {
         method: 'DELETE',
         headers: {

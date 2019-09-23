@@ -34,9 +34,11 @@ form h5 {
 
 .card {
     background-color: #F4F1F1;
-    margin: 5px;
+
     border: 5px solid #259A36;
     width: 12em;
+    margin-right: 7em;
+    margin-bottom: 2em;
 }
 
 img {
@@ -45,6 +47,7 @@ img {
 }
 .card-title {
     color: #3F3C3C;
+    text-shadow:1px 1px lightgrey;
 }
 
 .card-footer {

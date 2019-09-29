@@ -1,7 +1,8 @@
+import {addMovie, updateMovie, getMovieList} from './api';
 
+import { displayMovies, saveSearchCriteria} from './buildHTML';
 
-
-export function movieRatings() {
+export function selectMovieRatings() {
     /**
      *  Movie rating
      *
@@ -16,7 +17,7 @@ export function movieRatings() {
              *
              * Find the selected ratings
              */
-            console.log('here');
+            //console.log('here');
             let selectedMovieRatings = document.getElementsByClassName("movie-rating");
 
             let movieRatings = Array.from(selectedMovieRatings);
@@ -30,7 +31,7 @@ export function movieRatings() {
                 return rating.value;
             });
 
-            console.log(includeMovieRatings);
+            //console.log(includeMovieRatings);
 
             document.getElementById('selectedRating').value = includeMovieRatings;
         })
@@ -40,7 +41,7 @@ export function movieRatings() {
 
 }
 
- export function movieGenre() {
+export function selectMovieGenre() {
 
 
     /**
@@ -83,7 +84,7 @@ export function starsAddForm() {
     /**
      *
      *
-     * Add listener to the stars in the Add form.
+     * stars in the Add form.
      */
 
     for (let i = 1; i <= 5; i++) {
@@ -112,7 +113,7 @@ export function starsUpdateForm() {
     /**
      *
      *
-     * Add listener to the stars in the Update form.
+     * stars in the Update form.
      */
 
     for (let i = 1; i <= 5; i++) {
@@ -134,3 +135,43 @@ export function starsUpdateForm() {
         });
     }
 }
+
+/** add button*/
+
+document.getElementById("add-movie").addEventListener('click', event => {
+    addMovie(event);
+});
+
+/** update button*/
+
+document.getElementById("update-movie").addEventListener('click', event => {
+    updateMovie(event);
+    //getMovieList();
+});
+
+/** search button*/
+
+document.getElementById("search-movie").addEventListener('click', event => {
+    saveSearchCriteria(event);
+    getMovieList().then(movies => {
+        displayMovies(movies)
+    });
+
+});
+
+document.getElementById("doNotDeleteMovie").addEventListener('click', event => {
+    event.preventDefault();
+   // alert('Do not delete');
+    document.getElementById('deleteMovie').innerText = "false";
+    $('#myModal').modal('toggle');
+   // $("#myModal").modal();
+});
+
+document.getElementById("deleteThisMovie").addEventListener('click', event => {
+    event.preventDefault();
+    document.getElementById('deleteMovie').innerText = "true";
+    $('#myModal').modal('toggle');
+    //alert('delete');
+   // $("#myModal").modal();
+});
+

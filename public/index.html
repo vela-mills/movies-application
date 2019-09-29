@@ -16,14 +16,9 @@
 
 </head>
 <body id='test' >
-<div id="loader"><img src="img/Spinner-1s-200px.gif" alt=""></div>
+<div id="loader" ></div>
 <div class="container  mh-100" style="display: none" id="myDiv">
     <div class="col-md-12 text-center"><h1 style="align-content: center">MOVIE RATINGS</h1></div>
-    <div class="col-md-12">
-        <div class="alert alert-primary" role="alert" id="loading">
-            loading...
-        </div>
-    </div>
     <div id="movie-content" class="row">
         <div class="col-md-12">
             <div class="row">
@@ -148,6 +143,28 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+
+<div id="myModal"  class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteMovieInformation">Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="deleteThisMovie" type="submit">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="doNotDeleteMovie" type="submit">Close</button>
+                <input id="deleteMovie" value="true" type="hidden">
+            </div>
+        </div>
+    </div>
+</div>
 <input type="hidden" id="lastID" value="0">
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -161,11 +178,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
         crossorigin="anonymous"></script>
-<style>
-    body {
-        margin: 0;
-    }
-</style>
 
 <script src="./main.js"></script>
 

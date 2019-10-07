@@ -1,6 +1,6 @@
 /**Retrieve movies from /api/movies (db.json) set-up in server.js*/
 import {getMovieInfoOmdbAPI} from './OMDB_API';
-import {displaySpinner, clearAddMovie, removeSpinner} from './manageDOM';
+import {displaySpinner, clearAddMovie, removeSpinner, changeCardBackgroundColor} from './manageDOM';
 import {displayMovie} from "./buildHTML";
 
 /**
@@ -145,10 +145,12 @@ const deleteMovie = (id) => {
             'Content-Type': 'application/json',
         },
     };
+
     // update database
     fetch(`/api/movies/${id}`, options)
         .then(() => {
-            console.log(`movie ${id} deleted`)
+            console.log(`movie ${id} deleted`);
+            changeCardBackgroundColor();
         })
         .catch(() => {
             console.log('error on delete')
@@ -266,9 +268,10 @@ const updateMovie = (e) => {
 
 const getMovieList = () => {
     // let idArray = [];
+    // console.log('get movie list');
     return fetch('/api/movies')
         .then(response => response.json())
-        .catch("Error move ")
+        .catch("Error movie ")
 };
 
 

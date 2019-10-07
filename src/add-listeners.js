@@ -22,8 +22,7 @@ export function selectMovieRatings() {
              *
              * Find the selected ratings
              */
-                //console.log('here');
-            let selectedMovieRatings = document.getElementsByClassName("movie-rating");
+             let selectedMovieRatings = document.getElementsByClassName("movie-rating");
 
             let movieRatings = Array.from(selectedMovieRatings);
             //console.log(movieRatings);
@@ -39,6 +38,9 @@ export function selectMovieRatings() {
             //console.log(includeMovieRatings);
 
             document.getElementById('selectedRating').value = includeMovieRatings;
+            getMovieList().then(movies => {
+                displayMovies(movies)
+            });
         })
 
     }
@@ -76,9 +78,12 @@ export function selectMovieGenre() {
                 return rating.value;
             });
 
-            console.log(includeMovieGenre);
+           // console.log('selected movie genre ' +includeMovieGenre);
 
             document.getElementById('selectedGenre').value = includeMovieGenre;
+            getMovieList().then(movies => {
+                displayMovies(movies)
+            });
 
         });
     }
@@ -149,17 +154,6 @@ document.getElementById("add-movie").addEventListener('click', event => {
 
 
 
-/** Handle the search button*/
-
-document.getElementById("search-movie").addEventListener('click', event => {
-    saveSearchCriteria(event);
-    getMovieList().then(movies => {
-        displayMovies(movies)
-    });
-
-});
-
-
 /** Handle the update button in the card **/
 export function addUpdateButtonCard(id) {
     document.getElementById(`update${id}`).addEventListener('click', event => {
@@ -213,6 +207,24 @@ $('#confirm-delete').on('show.bs.modal', function (e) {
 document.getElementById('cancelDelete').addEventListener('click', event => {
     $("#confirm-delete").modal('toggle');
 });
+
+
+document.getElementById('ratingID').addEventListener('click', event =>{
+    if (document.getElementById('rating-options').className === 'hide-elements'){
+        document.getElementById('rating-options').className = "";
+    } else {
+        document.getElementById('rating-options').className = 'hide-elements';
+    };
+});
+
+document.getElementById('genreID').addEventListener('click', event =>{
+    if (document.getElementById('genre-options').className === 'hide-elements'){
+        document.getElementById('genre-options').className = "";
+    } else {
+        document.getElementById('genre-options').className = 'hide-elements';
+    };
+});
+
 
 
 

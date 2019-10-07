@@ -1,6 +1,3 @@
-
-import {removeSpinner} from "./manageDOM";
-
 /**
  *
  * Purpose : build the cards for the movie
@@ -14,10 +11,12 @@ import {removeSpinner} from "./manageDOM";
 let includeMovieGenre = "";
 let includeMovieRatings = "";
 
-import { addDeleteButtonCard, addUpdateButtonCard} from './add-listeners';
+
+import {addDeleteButtonCard, addUpdateButtonCard} from './add-listeners';
+import {removeSpinner, changeCardBackgroundColor} from "./manageDOM";
 
 /**
- * Byuld the movie d=card
+ * Build the movie d=card
  * @param title -- movie title
  * @param rating -- movie rating (1 -5 stars)
  * @param id -- movie id
@@ -27,9 +26,9 @@ import { addDeleteButtonCard, addUpdateButtonCard} from './add-listeners';
 
 function buildMovieCard(title, rating, id, urlPoster) {
     let html = "";
-    html += `<div class="card border-0">`;
+    html += `<div class="card">`;
     // html += `<h5 class="card-title  h3 text-center" > ${title} </h5>`;
-    html += `<div card="card-img-top" id="div-img"><img src="${urlPoster}" id="img${id}" > </div>`;
+    html += `<div  id="div-img"><img src="${urlPoster}" id="img${id}" > </div>`;
 
     let starHTML = "";
 
@@ -40,10 +39,10 @@ function buildMovieCard(title, rating, id, urlPoster) {
         starHTML += `<span class="fa fa-star"></span>`;
     }
 
-    html += ` <div class="card-body text-center pt-0 pb-0 star-size" id="dStar${id}"> ${starHTML} </div>`;
-    html += `<div class="row card-body p-0 border-0" style="margin-left: 0px; margin-right: 0px">`;
-    html += `<div class="col-md-6 pl-0"><button class=" btn btn-success btn-lg btn-block movie-button " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
-    html += `<div class="col-md-6 pr-0"><button class=" btn btn-danger btn-lg btn-block movie-button" id="delete${id}"><i class="fa fa-ban"></i></button></div>`;
+    html += ` <div class="star-size star-disp" id="dStar${id}"> ${starHTML} </div>`;
+    html += `<div class="card-buttons" style="margin-left: 0px; margin-right: 0px">`;
+    html += `<div ><button class=" btn btn-success btn-lg btn-block movie-button " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
+    html += `<div ><button class=" btn btn-danger btn-lg btn-block movie-button" id="delete${id}"><i class="fa fa-ban"></i></button></div>`;
     html += `</div>`;
     html += `</div>`;
     return html;
@@ -61,31 +60,34 @@ function includeThisMovie(movieGenre, movieRated) {
 
     let includeMovie = false;
 
-    let movieGenres = movieGenre;
-
-    //console.log(includeMovieGenre);
+    includeMovieGenre = document.getElementById('selectedGenre').value;
     if (includeMovieGenre.length > 0) {
         let movieGenreList = includeMovieGenre.toLowerCase().split(',');
-        movieGenres.forEach(function (item) {
-            if (movieGenreList.indexOf(item.toLowerCase().trim()) >= 0) {
-                includeMovie = true;
-            }
-        })
+        if (movieGenre.length != 0) {
+            movieGenre.forEach(function (item) {
+                if (movieGenreList.indexOf(item.toLowerCase().trim()) >= 0) {
+                    includeMovie = true;
+                }
+            })
+        } else {
+            includeMovie = false;
+        }
 
     } else {
         includeMovie = true;
     }
-    //console.log('include movie ' + includeMovie);
-    if (includeMovie) {
 
+    let includeMovieRatings = document.getElementById('selectedRating').value;
+    //console.log('includeMovieRatings ' + includeMovieRatings);
+    if (includeMovie) {
         if (includeMovieRatings.length > 0) {
-            let includeMovieRatingList = includeMovieRatings.toLowerCase().split(',');
-            includeMovie = (includeMovieRatingList.toLowerCase().indexOf(movieRated) >= 0);
+            let includeMovieRatingList = includeMovieRatings.split(',');
+            includeMovie =  (includeMovieRatingList.indexOf(movieRated) >= 0);
+
         } else {
             includeMovie = true;
         }
     }
-    //console.log('include movie ' + includeMovie);
     return includeMovie;
 }
 
@@ -118,7 +120,7 @@ export function displayMovies(movies) {
 
         /** Display the movies **/
         if (includeThisMovie(genre, movieRated)) {
-            html += ` <div class="col-md-4 card" id="movie${id}">`;
+            html += ` <div class="movie-card" id="movie${id}">`;
             html += buildMovieCard(title, rating, id, urlPoster);
             html += `</div >`;
             idArray.push(id);
@@ -132,14 +134,15 @@ export function displayMovies(movies) {
 
     /**Display movies on screen*/
     document.getElementById('movie-list').innerHTML = html;
-   // console.log(html);
+
+    // console.log(html);
 
     /**Add Event listeners for the delete and the update buttons included in the cards */
     for (let i = 0; i < idArray.length; i++) {
         addDeleteButtonCard(idArray[i], titleArray[i]);
         addUpdateButtonCard(idArray[i]);
     }
-
+    changeCardBackgroundColor();
 }
 
 /**
@@ -181,7 +184,7 @@ export function displayMovie(movie) {
             /**
              * Create the card for the new movie and add it to the html
              */
-            movieCardHTML = ` <div class="col-md-4 card" id="movie${id}">`;
+            movieCardHTML = ` <div class="movie-card" id="movie${id}">`;
             movieCardHTML += buildMovieCard(title, rating, id, urlPoster);
             movieCardHTML += `</div >`;
             //console.log(movieCardHTML);
@@ -189,7 +192,7 @@ export function displayMovie(movie) {
             /**Add Event listeners for the delete and the update buttons included in the cards */
             addDeleteButtonCard(id, title);
             addUpdateButtonCard(id);
-
+            changeCardBackgroundColor();
         }
         ;
 

@@ -102,11 +102,8 @@ const addMovie = (e) => {
             year,
             urlPoster
         };
-        /**
-         *
-         * Update the movie database
-         */
 
+        //Update the movie database
         const url = '/api/movies';
         const options = {
             method: 'POST',
@@ -158,10 +155,10 @@ const deleteMovie = (id) => {
 
 };
 
-/**Update Movie */
+/**Update Movie
+ ** Step 1 Move data from display to update form
+ * */
 
-
-//Step 1 Move data from display to update form
 const displayUpdateScreen = (id) => {
    // alert('Display update form');
     return fetch(`/api/movies/${id}`)
@@ -189,7 +186,9 @@ const displayUpdateScreen = (id) => {
         });
 };
 
-//Step 2 update movie in database
+/**Update Movie
+ ** Step 2 update movie in database
+ * */
 const updateMovie = (e) => {
     e.preventDefault(); // don't submit the form, we just want to update the data
     let rating = document.getElementById('new-rating').value;
@@ -197,18 +196,15 @@ const updateMovie = (e) => {
     let id = document.getElementById("updateMovieID").value;
     clearAddMovie();
 
-    /** Hide  update form */
-
-    //document.getElementById('update-form').style.display = 'none';
+    // Hide  update form
     $("#update-form").modal('toggle');
 
     let urlPoster = "";
     let movieRated = "";
     let currentGenre = "";
     let year = "";
-    /**
-     * Get the movie information
-     */
+
+    //Get the movie information
     getMovieInfoOmdbAPI(title).then((data) => {
         //console.log(data);
         urlPoster = data["Poster"];

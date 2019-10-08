@@ -75,6 +75,9 @@ label {
    border: 1.5em solid #F4F1F1;
 }
 #right-pane {
+    display: flex;
+    flex-wrap: wrap;
+    /*width: 100%;*/
     position: relative;
     max-height: 100%;
     overflow: auto;
@@ -83,7 +86,7 @@ label {
 
 #main-div {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 25% 75%;
     grid-gap: 2em;
 }
 
@@ -93,10 +96,19 @@ label {
 
 /*Elements by class name*/
 
+.boxLoading {
+    background-image: url(img/Spinner-1s-200px.gif);
+}
+
 .card{
     display: flex;
     align-content: center;
-    /*margin: 1em;*/
+    /*border: 0px;*/
+    /*border-radius: 0px;*/
+    padding: 1em;
+    height: 100%;
+    /*margin: 2em 1em;*/
+    box-shadow: 10px 10px 8px 10px #888888;
 }
 
 .card-body {
@@ -114,8 +126,14 @@ label {
 .card-buttons{
     display: flex;
     justify-content: space-evenly;
+    padding: .5em;
 
 }
+
+.checked {
+    color: orange;
+}
+
 
 .hide-elements {
     display: none;
@@ -129,16 +147,8 @@ label {
     background-color: #F4F1F1;
     width: 12em;
     border: 2em;
-    margin-right: 2em;
-    margin-bottom: 2em;
-}
-
-.checked {
-    color: orange;
-}
-
-.boxLoading {
-    background-image: url(img/Spinner-1s-200px.gif);
+    /*margin-right: 2em;*/
+    /*margin-bottom: 2em;*/
 }
 
 .star-size {
@@ -149,7 +159,6 @@ label {
     display: flex;
     justify-content: center;
 }
-
 
 .stars-bck {
     background: white;

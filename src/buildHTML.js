@@ -8,12 +8,8 @@
  * Find the selected ratings
  */
 
-let includeMovieGenre = "";
-let includeMovieRatings = "";
-
-
 import {addDeleteButtonCard, addUpdateButtonCard} from './add-listeners';
-import {removeSpinner, changeCardBackgroundColor} from "./manageDOM";
+import {removeSpinner} from "./manageDOM";
 
 /**
  * Build the movie d=card
@@ -39,7 +35,7 @@ function buildMovieCard(title, rating, id, urlPoster) {
         starHTML += `<span class="fa fa-star"></span>`;
     }
 
-    html += ` <div class="star-size star-disp" id="dStar${id}"> ${starHTML} </div>`;
+    html += ` <div class="star-size star-disp" style="padding: 1em;"  id="dStar${id}"> ${starHTML} </div>`;
     html += `<div class="card-buttons" style="margin-left: 0px; margin-right: 0px">`;
     html += `<div ><button class=" btn btn-success btn-lg btn-block movie-button " id="update${id}"><i class="fa fa-edit"></i></button></div>`;
     html += `<div ><button class=" btn btn-danger btn-lg btn-block movie-button" id="delete${id}"><i class="fa fa-ban"></i></button></div>`;
@@ -60,7 +56,7 @@ function includeThisMovie(movieGenre, movieRated) {
 
     let includeMovie = false;
 
-    includeMovieGenre = document.getElementById('selectedGenre').value;
+    let includeMovieGenre = document.getElementById('selectedGenre').value;
     if (includeMovieGenre.length > 0) {
         let movieGenreList = includeMovieGenre.toLowerCase().split(',');
         if (movieGenre.length != 0) {
@@ -78,7 +74,8 @@ function includeThisMovie(movieGenre, movieRated) {
     }
 
     let includeMovieRatings = document.getElementById('selectedRating').value;
-    //console.log('includeMovieRatings ' + includeMovieRatings);
+
+    // Check if we are going to include the movie
     if (includeMovie) {
         if (includeMovieRatings.length > 0) {
             let includeMovieRatingList = includeMovieRatings.split(',');
@@ -97,8 +94,8 @@ function includeThisMovie(movieGenre, movieRated) {
  */
 export const saveSearchCriteria = (e) => {
     e.preventDefault(); // don't submit the form, we just want to update the data
-    includeMovieGenre = document.getElementById('selectedGenre').value;
-    includeMovieRatings = document.getElementById('selectedRating').value;
+    // includeMovieGenre = document.getElementById('selectedGenre').value;
+    // includeMovieRatings = document.getElementById('selectedRating').value;
 
 }
 
@@ -142,7 +139,6 @@ export function displayMovies(movies) {
         addDeleteButtonCard(idArray[i], titleArray[i]);
         addUpdateButtonCard(idArray[i]);
     }
-    changeCardBackgroundColor();
 }
 
 /**
@@ -192,7 +188,6 @@ export function displayMovie(movie) {
             /**Add Event listeners for the delete and the update buttons included in the cards */
             addDeleteButtonCard(id, title);
             addUpdateButtonCard(id);
-            changeCardBackgroundColor();
         }
         ;
 

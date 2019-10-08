@@ -38,13 +38,15 @@ function clearAddMovie() {
 function changeCardBackgroundColor() {
     let cards = document.getElementsByClassName('card');
     // console.log(cards);
-    for (let index = 1; index < cards.length; index += 2) {
+    let rowCount = 0;
+    for (let index = 0; index < cards.length; index++) {
         if (index % 2 == 1) {
             //document.getElementById("MyElement").className = "MyClass";
             cards[index].className = "card odd-movie-card";
         } else {
             cards[index].className = "card";
         }
+
     }
 }
 

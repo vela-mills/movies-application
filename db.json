@@ -87,15 +87,6 @@
       "urlPoster": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"
     },
     {
-      "id": 22,
-      "title": "Little Red Riding Rabbit",
-      "rating": "4",
-      "movieRated": "Approved",
-      "genre": "",
-      "year": "1944",
-      "urlPoster": "https://m.media-amazon.com/images/M/MV5BZWMwMTBkMGItNzYxYi00YzYzLWE1ZTYtZTM1OTNmM2I4MDc4XkEyXkFqcGdeQXVyNjc2NTQzMjU@._V1_SX300.jpg"
-    },
-    {
       "id": 23,
       "title": "The Lives of Others",
       "rating": "2",
@@ -125,20 +116,13 @@
     {
       "id": 26,
       "title": "The Dust Bowl",
-      "rating": "4",
+      "rating": "5",
       "movieRated": "N/A",
-      "genre": "",
+      "genre": [
+        "Documentary"
+      ],
       "year": "2012–",
       "urlPoster": "https://m.media-amazon.com/images/M/MV5BMTk2MjIzNjYxNF5BMl5BanBnXkFtZTgwNDI2NDAxMzE@._V1_SX300.jpg"
-    },
-    {
-      "id": 27,
-      "title": "Pocahontas",
-      "rating": "4",
-      "movieRated": "G",
-      "genre": "",
-      "year": "1995",
-      "urlPoster": "https://m.media-amazon.com/images/M/MV5BMzc4YzhiN2ItY2Y4NC00YTA0LWEyMjEtNzllNTcxZDdjODhiXkEyXkFqcGdeQXVyNTUyMzE4Mzg@._V1_SX300.jpg"
     },
     {
       "id": 28,
@@ -148,6 +132,15 @@
       "genre": "",
       "year": "1989",
       "urlPoster": "https://m.media-amazon.com/images/M/MV5BN2JlZTBhYTEtZDE3OC00NTA3LTk5NTQtNjg5M2RjODllM2M0XkEyXkFqcGdeQXVyNjk1Njg5NTA@._V1_SX300.jpg"
+    },
+    {
+      "id": 29,
+      "title": "101 Dalmatians",
+      "rating": "4",
+      "movieRated": "G",
+      "genre": "",
+      "year": "1961",
+      "urlPoster": "https://m.media-amazon.com/images/M/MV5BZGMyMjE4OGUtNGZmMC00YzdmLThkMWYtZWIzMmEzNjA4MzVkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
     }
   ]
 }

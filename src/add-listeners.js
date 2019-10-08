@@ -1,26 +1,28 @@
+import {addMovie, updateMovie, getMovieList, deleteMovie, displayUpdateScreen} from './api';
+
+import {displayMovies, saveSearchCriteria} from './buildHTML';
+
+/**
+ *
+ * Purpose: Add the event listeners
+ */
 
 
-
-export function movieRatings() {
-    /**
-     *  Movie rating
-     *
-     * */
+/**
+ *  Select movie rating
+ *
+ * */
+export function selectMovieRatings() {
 
     const movieRatingElements = document.getElementsByClassName('movie-rating');
-
     for (let element of movieRatingElements) {
         //console.log(element.id);
         document.getElementById(element.id).addEventListener('click', function () {
-            /**
-             *
-             * Find the selected ratings
-             */
-            console.log('here');
-            let selectedMovieRatings = document.getElementsByClassName("movie-rating");
+
+            //Find the selected ratings
+             let selectedMovieRatings = document.getElementsByClassName("movie-rating");
 
             let movieRatings = Array.from(selectedMovieRatings);
-            //console.log(movieRatings);
 
             let includeMovieRatings = movieRatings.filter(function (checkBox) {
                 return (checkBox["checked"] === true);
@@ -30,9 +32,10 @@ export function movieRatings() {
                 return rating.value;
             });
 
-            console.log(includeMovieRatings);
-
             document.getElementById('selectedRating').value = includeMovieRatings;
+            getMovieList().then(movies => {
+                displayMovies(movies)
+            });
         })
 
     }
@@ -40,24 +43,17 @@ export function movieRatings() {
 
 }
 
- export function movieGenre() {
+/**
+ *  Select movie genre
+ *
+ * */
+export function selectMovieGenre() {
 
-
-    /**
-     *  Movie genre
-     *
-     * */
     const movieGenreElements = document.getElementsByClassName('genre');
-
     for (let element of movieGenreElements) {
-        //console.log(element.id);
         document.getElementById(element.id).addEventListener('click', function () {
 
-            /**
-             *
-             * Find the selected genre
-             */
-
+            // Find the selected genre
             let selectedMovieGenre = document.getElementsByClassName("genre");
 
             let movieGenre = Array.from(selectedMovieGenre);
@@ -70,26 +66,27 @@ export function movieRatings() {
                 return rating.value;
             });
 
-            console.log(includeMovieGenre);
-
             document.getElementById('selectedGenre').value = includeMovieGenre;
+            getMovieList().then(movies => {
+                displayMovies(movies)
+            });
 
         });
     }
     ;
 };
 
+
+
+/**
+ *
+ *
+ * Handle the stars in the Add form.
+ */
 export function starsAddForm() {
-    /**
-     *
-     *
-     * Add listener to the stars in the Add form.
-     */
 
     for (let i = 1; i <= 5; i++) {
         document.getElementById("star" + i).addEventListener("click", function () {
-            // console.log(ths);
-            //console.log(this);
             var lastStar = this.id.replace("star", "");
             for (var i = 1; i <= 5; i++) {
                 var cur = document.getElementById("star" + i)
@@ -107,13 +104,12 @@ export function starsAddForm() {
     ;
 }
 
+/**
+ *
+ *
+ * Handle the stars in the Update form.
+ */
 export function starsUpdateForm() {
-
-    /**
-     *
-     *
-     * Add listener to the stars in the Update form.
-     */
 
     for (let i = 1; i <= 5; i++) {
         document.getElementById("update-star" + i).addEventListener("click", function () {
@@ -134,3 +130,88 @@ export function starsUpdateForm() {
         });
     }
 }
+
+/** Handle the add button*/
+
+document.getElementById("add-movie").addEventListener('click', event => {
+    addMovie(event);
+});
+
+
+/** Handle the update button in the card **/
+export function addUpdateButtonCard(id) {
+    document.getElementById(`update${id}`).addEventListener('click', event => {
+        document.getElementById('currentMovieID').value = id;
+        $('#update-form').modal('toggle');
+        displayUpdateScreen(id);
+    });
+
+}
+
+/** Handle the confirm update **/
+$('#update-form').on('show.bs.modal', function (e) {
+    document.getElementById('confirmUpdateMovie').addEventListener('click', event => {
+        // alert('Update this movie ');
+        let id = document.getElementById('currentMovieID').value;
+        updateMovie(event);
+
+
+    });
+
+});
+
+
+/** Handle the delete button in the card **/
+export function addDeleteButtonCard(id, title) {
+    document.getElementById(`delete${id}`).addEventListener('click', event => {
+        /** Display the delete pop up */
+        document.getElementById('currentMovieID').value = id;
+        $("#confirm-delete").modal('toggle');
+        document.getElementById("deleteMovieInformation").innerText = "Do you want to delete the movie " + title + "?";
+
+    });
+}
+
+/** Handle the confirm delete **/
+$('#confirm-delete').on('show.bs.modal', function (e) {
+    document.getElementById('confirmDeleteMovie').addEventListener('click', event => {
+        // alert('Delete movie ');
+        let id = document.getElementById('currentMovieID').value;
+
+        var elem = document.querySelector(`#movie${id}`);
+        elem.parentNode.removeChild(elem);
+        deleteMovie(id);
+        $("#confirm-delete").modal('toggle');
+
+    });
+
+});
+
+/** Handle the cancel delete **/
+document.getElementById('cancelDelete').addEventListener('click', event => {
+    $("#confirm-delete").modal('toggle');
+});
+
+
+//Toggle the rating options
+document.getElementById('ratingID').addEventListener('click', event =>{
+    if (document.getElementById('rating-options').className === 'hide-elements'){
+        document.getElementById('rating-options').className = "";
+    } else {
+        document.getElementById('rating-options').className = 'hide-elements';
+    };
+});
+
+// Toggle the genre options
+document.getElementById('genreID').addEventListener('click', event =>{
+    if (document.getElementById('genre-options').className === 'hide-elements'){
+        document.getElementById('genre-options').className = "";
+    } else {
+        document.getElementById('genre-options').className = 'hide-elements';
+    };
+});
+
+
+
+
+

@@ -14,8 +14,6 @@ function initForm() {
 
     starsUpdateForm();
 
-
-
 }
 
 function displaySpinner() {
@@ -57,7 +55,7 @@ function displayMessage(title, option){
         }
         case 3:
         {
-            document.getElementById('warning').innerHTML = "The movie '" + title + "' exists in the system.";
+           document.getElementById('warning').innerHTML = "The movie '" + title + "' exists in the system.";
             document.getElementById('warning').style.display = 'block';
             document.getElementById('success').style.display = 'none';
             document.getElementById('danger').style.display = 'none';
@@ -74,10 +72,8 @@ function displayMessage(title, option){
         }
     }
      $('#non-destructive-message').modal('toggle');
-    // var delay = 5000; // delay time in milliseconds
 
-
-    var timeoutId = setTimeout(function () {
+    let timeoutId = setTimeout(function () {
         $('#non-destructive-message').modal('toggle')
     }, 3000);
 }

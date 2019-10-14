@@ -47,20 +47,26 @@ label {
     align-content: center;
 }
 
+#left-pane {
+    background-color: #F4F1F1;
+    border: 1.5em solid #F4F1F1;
+}
+
 #loader {
     min-height: 100%;
     background: url('img/movie_projector.gif') no-repeat;
     background-size: 100%;
 }
 
-#movie-content {
-    border-radius: 1em;
+#main-div {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-gap: 2em;
 }
 
-
-#left-pane {
-    background-color: #F4F1F1;
-    border: 1.5em solid #F4F1F1;
+#movie-content {
+    width: 100%;
+    border-radius: 1em;
 }
 
 #right-pane {
@@ -71,16 +77,6 @@ label {
     overflow: auto;
 }
 
-
-#main-div {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    grid-gap: 2em;
-}
-
-#movie-content {
-    width: 100%;
-}
 
 /*Elements by class name*/
 

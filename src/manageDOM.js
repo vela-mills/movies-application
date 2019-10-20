@@ -15,6 +15,7 @@ function initForm() {
     starsUpdateForm();
 
     displayCorrectHeadings();
+    removeSpinner();
 
 
 }
